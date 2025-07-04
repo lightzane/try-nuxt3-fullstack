@@ -9,7 +9,18 @@ type PokemonResponse = {
 export default defineEventHandler(async (event) => {
   const pokemon = event.context.params?.name; // the `.name` reflect the `[name].ts`
   const URL = `https://pokeapi.co/api/v2/pokemon/${pokemon}`;
-  const { id, name, sprites } = await $fetch<PokemonResponse>(URL);
+  // const { id, name, sprites } = await $fetch<PokemonResponse>(URL);
+  const [error, data] = await catchError($fetch<PokemonResponse>(URL));
+
+  if (error) {
+    throw createError(error);
+  }
+
+  if (!data) {
+    return null;
+  }
+
+  const { id, name, sprites } = data;
 
   return {
     id,
@@ -17,3 +28,14 @@ export default defineEventHandler(async (event) => {
     sprite: sprites.front_default,
   };
 });
+
+async function catchError<T, E = Error>(
+  promise: Promise<T>
+): Promise<[E | null, T | null]> {
+  try {
+    const data = await promise;
+    return [null, data];
+  } catch (err) {
+    return [err as E, null];
+  }
+}
