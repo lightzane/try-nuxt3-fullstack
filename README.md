@@ -2,6 +2,13 @@
 
 Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
 
+Following the related course: https://www.vuemastery.com/courses/nuxt-3-server/project-setup
+
+## Prerequisite
+
+- Vue 3
+- Previous Nuxt 3 lessons: https://github.com/lightzane/try-nuxt3-trello
+
 ## How this project was created
 
 ```bash
