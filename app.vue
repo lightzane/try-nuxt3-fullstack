@@ -1,5 +1,6 @@
 <template>
-  <div>
+  <UApp>
     <NuxtPage />
-  </div>
+    <UToast />
+  </UApp>
 </template>
